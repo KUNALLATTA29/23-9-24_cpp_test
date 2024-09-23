@@ -1,0 +1,338 @@
+Que 1.  .Write a class that represents a custom string datatype. Overload the + operator to allow the concatenation of two objects of this class.
+
+
+Ans 1. 
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class CustomString{
+    private:
+        string data;
+        
+    public:
+        CustomString(string str = ""){
+            data = str;
+        }
+        CustomString operator+(const CustomString & obj){
+            CustomString result;
+            result.data = data + obj.data;
+            return result;
+        }
+        
+        string getinfo(){
+            return data;
+        }
+};
+
+int main(){
+    
+    CustomString obj1("kunal");
+    CustomString obj2("latta");
+    
+    CustomString result = obj1 + obj2;
+    
+    cout<<result.getinfo();
+    
+}
+
+
+
+
+Que 2. Design a class that represents an integer. Overload the + operator to add two integer objects.
+
+Ans 2.
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Integer{
+    private:
+        int data;
+        
+    public:
+        Integer(int val = 0){
+            data = val;
+        }
+        Integer operator+(const Integer & obj){
+            Integer result;
+            result.data = data + obj.data;
+            return result;
+        }
+        
+        int getinfo(){
+            return data;
+        }
+};
+
+int main(){
+    
+    Integer obj1(5);
+    Integer obj2(5);
+    
+    Integer result = obj1 + obj2;
+    
+    cout<<result.getinfo();
+    
+}
+
+
+
+
+Que 4.   Implement a class LinkedList
+		Create Node
+		pushBack
+		PopBack
+		PushFront
+		PopFront
+		Display
+
+Ans 4.
+
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Node{
+    int data;
+    Node* next;
+};
+
+class LinkedList{
+    
+    Node* head;
+    
+    public:
+        LinkedList(){
+            head = NULL;
+        }
+        
+        void pushFront(int value){
+            Node* newnode = new Node();
+            newnode->data = value;
+            newnode->next = head;
+            head = newnode;
+        }
+        
+        void pushBack(int value){
+            Node* newnode = new Node();
+            newnode->data = value;
+            newnode->next = NULL;
+            
+            if(!head){
+                head = newnode;
+                return;
+            }
+            
+            Node* temp = head;
+            while(temp->next){
+                temp = temp->next;
+            }
+            
+            temp->next = newnode;
+            
+        }
+        
+        void popFront(){
+            if(!head){
+                cout<<"list is empty";
+                return;
+            }
+            
+            Node* temp = head;
+            head = head->next;
+            delete temp;
+        }
+        
+        void popBack(){
+            if(!head){
+                cout<<"list is empty";
+                return;
+            }
+            
+            if(!head->next){
+                delete head;
+                head = NULL;
+                return;
+            }
+            
+            Node* temp = head;
+            while(temp->next->next){
+                temp = temp->next;
+            }
+            
+            delete temp->next;
+            temp->next = NULL;
+        }
+        
+        void display(){
+            if(!head){
+                cout<<"list is empty";
+            }
+            
+            Node* temp = head;
+            while(temp){
+                cout<<temp->data<<"->";
+                temp = temp->next;
+            }
+            cout<<" null";
+        }
+};
+
+int main(){
+    
+    LinkedList list;
+    
+    list.pushFront(2);
+    list.pushBack(4);
+    list.display();
+    cout<<endl;
+    list.popBack();
+    list.popFront();
+    list.display();
+}
+
+
+
+
+
+Que 5. What is the difference between array and linked list.
+
+Ans 5.
+
+Array:-
+	1.collection of element stored in contiguous memory locations.
+	2.allocated in a single contiguous block.
+	3.direct access using index.
+	4.inserting and deleting require shifting of elements.
+
+LinkedList:-
+
+	1.collection of nodes  where each node contains data and a reference to the next node.
+	2.each node is allocated separately.
+	3.must traverse from head to reach at specific node.
+	4.inserting and deleting doesn't require shifting.
+
+
+
+
+
+Que 6. What is difference between Primitive and Non primitive data structures.
+
+Ans 6.
+
+primitive:-
+	1.these are the basic data types provided by the programming language.
+	2.they have predefined size.
+	example:-
+		1.int, 2.char, 3.string, 4.float, 5.bool etc.
+
+non primitive:-
+	1.these are complex data types that can store multiple values or collection of data.
+	2.they are built using primitive data types.
+	example:-
+		1.array, 2.linkedlist, 3.trees, 4.graphs etc.
+
+
+
+
+Que 7. How to do constructor calling, how many different types of constructors are there ?
+
+Ans 7.
+
+constructors are special member functions they are called automatically when object is created.
+
+constructor calling:-
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class student{
+    public:
+        student(){
+            cout<<"constructor is called";
+        }
+};
+int main(){
+    
+   student obj;
+   
+   return 0;
+}
+
+
+==> there are mainly three types of constructor
+	1.default constructor -> it takes no arguments.
+	2.parameterized constructor -> it takes parameters.
+	3.copy constructor -> it initializes an object using another object of the same class.
+
+
+
+
+
+Que 8. What is the difference between overloading and overriding of functions.
+
+Ans 8.
+
+overloading:-
+	1.it allow multiple functions to have same name but different parameters.
+	2.it provides ways to perform similar action based on different input types.
+	3.it resolve at compile time.
+
+overriding:-
+	1.it allow a derived class to provide a specific implementation of a function that is already 	  defined in its base class.
+	2.function must have same name, return type and parameters.
+	3.it helps to extend the behavior of base class function in derived class.
+
+
+
+
+Que 9. What is the difference between call by value and call by reference.
+
+Ans 9.
+
+call by value -> in this a copy of actual parameters value is passed to the function.
+
+call by reference -> int this the reference to the actual parameter is passed to the function.
+
+
+
+
+Que 10. Create a Class rectangle which has friend class as Area. Using friend function, calculate the area of rectangle.
+
+Ans 10.
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Rectangle{
+    private:
+        float len;
+        float wid;
+        
+    public:
+        Rectangle(float a, float b){
+            len=a;
+            wid=b;
+        }
+        
+        friend class Area;
+};
+
+class Area{
+    public:
+        float sol(Rectangle result){
+            return result.len * result.wid;
+        }
+};
+int main(){
+    
+   Rectangle obj(2.4, 7.6);
+   Area obj2;
+   cout<<obj2.sol(obj);
+   return 0;
+}
+
+
+
+
+
